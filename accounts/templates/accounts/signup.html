@@ -1,8 +1,62 @@
-{% extends 'base_layout.html' %} {% block content %}
-<h1>Signup</h1>
-<form class="site-form" action="/accounts/signup/" method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit" value="Signup" />
-</form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Todo APP</title>
+  </head>
+  <body>
+    <h1>Sign up</h1>
+
+    <form action="{% url 'accounts:signup' %}" method="POST">
+      {% csrf_token %}
+      <label for="user">Username</label>
+      <input type="text" id="user" name="user" placeholder="Username" />
+      <br />
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" placeholder="Email" />
+      <br />
+      <label for="firstname">First name</label>
+      <input
+        type="text"
+        id="firstname"
+        name="firstname"
+        placeholder="First name"
+      />
+      <br />
+      <label for="lastname">Last name</label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        placeholder="Last name"
+      />
+      <br />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+      />
+      <br />
+      <label for="confirm_password">Confirm password</label>
+      <input
+        type="password"
+        id="confirm_password"
+        name="confirm_password"
+        placeholder="Confirm password"
+      />
+      <br />
+      <button>Sign up</button>
+    </form>
+
+    <span>
+      <a href="{% url 'accounts:login' %}">Login</a>
+    </span>
+
+    {% if error %}
+    <p class="error">{{ error }} {% endif %}</p>
+  </body>
+</html>
