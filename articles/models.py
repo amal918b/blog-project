@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -9,8 +9,7 @@ class Article(models.Model):
     slug = models.SlugField()
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    # thumb = models.ImageField(default='default.png', blank=True)
-    # add in author later
+    author = models.ForeignKey(User, on_delete='Article', default=None)
 
     def snippet(self):
         return self.body[:50]+'...'  # get 50 first characters

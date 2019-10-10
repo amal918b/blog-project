@@ -1,18 +1,21 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from . import views
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
+from articles import views as article_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # raw string
     path('about/', views.about),
-    path('', views.homepage),
+    # path('', views.homepage),
+    path('', article_views.article_list, name="home"),
+    # register the accounts urls
+    url(r'^accounts/', include('accounts.urls')),
     # the one for the app
     path('articles/', include('articles.urls')),
-    # register the accounts urls
-    path('accounts/', include('accounts.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
